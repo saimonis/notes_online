@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+"rootDir": "src",
+"outDir": "jsdir",
     "target": "es5",
     "lib": [
       "dom",
