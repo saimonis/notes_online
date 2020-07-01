@@ -1,0 +1,12 @@
+.main-menu .ant-tabs-tab{
+    display: block;
+    height: 100%;
+    user-select: none;
+    padding: 0;
+}
+
+.main-menu .ant-tabs-tab-btn a{
+    display: block;
+    height: 100%;
+    padding:12px 0;
+}

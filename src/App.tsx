@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC, useEffect} from "react";
+import {BrowserRouter as Router, useLocation} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Routes from "./components/routes";
+import Main from "./pages/main";
+import Stats from "./pages/stats";
+
+import Menu from "./components/menu";
+
+const routesData = [
+    {
+        to: "/stats",
+        title: "Stats",
+        element: Stats,
+    },
+    {
+        to: "/",
+        title: "Main",
+        element: Main,
+    },
+];
+
+const App: FC = () => {
+
+    return (
+        <Router>
+            <div>
+                <Menu routesData={routesData}/>
+                <Routes routesData={routesData}/>
+            </div>
+        </Router>
+    );
+};
 
 export default App;
