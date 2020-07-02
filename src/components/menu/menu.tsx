@@ -1,34 +1,39 @@
-import React, {FC, ReactElement} from "react";
+import React, { FC, ReactElement, useState } from "react";
 
-import {Tabs} from "antd";
+import { Menu as MenuAntd } from "antd";
 
-import {Link} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./menu.css";
 
 type PropTypes = {
-    routesData: object[],
-    children?: never
-}
-
-interface Page {
-    to: string,
-    title: string,
-    element: any,
+  routesData: object[];
+  children?: never;
 };
 
-const Menu: FC<PropTypes> = ({routesData}: PropTypes): ReactElement => {
-    const {TabPane} = Tabs;
+const Menu: FC<PropTypes> = ({ routesData }: PropTypes): ReactElement => {
+  const [count, setState] = useState("");
+  let location = useLocation();
+  const data: any = [];
 
-    return (
-        <div className={'main-menu'}>
-            <Tabs defaultActiveKey="2">
+  React.useEffect(() => {
+    let path = (data.indexOf(location.pathname) + 1).toString();
+    setState(path);
+  }, [location, data]);
 
-                {routesData.map(({to, title}: any): ReactElement => {
-                    return (<TabPane tab={<Link to={to}>{title}</Link>} key={to + title}/>)
-                })}
-
-            </Tabs>
-        </div>);
+  return (
+    <MenuAntd theme="dark" mode="horizontal" selectedKeys={[count]}>
+      {routesData.map(
+        ({ to, title }: any, index: number): ReactElement => {
+          data.push(to);
+          return (
+            <MenuAntd.Item key={(index + 1).toString()}>
+              <Link to={to}>{title}</Link>
+            </MenuAntd.Item>
+          );
+        }
+      )}
+    </MenuAntd>
+  );
 };
 export default Menu;
