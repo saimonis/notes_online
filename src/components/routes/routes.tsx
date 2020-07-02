@@ -1,12 +1,19 @@
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement, ReactNode } from "react";
 import { Switch, Route } from "react-router-dom";
 
-interface PropTypes {
-  routesData: object[];
-  children?: never;
+interface IData {
+  to: string;
+  title?: string;
+  element: ReactNode;
+  exact?: boolean;
 }
 
-const Routes = ({ routesData }: PropTypes): ReactElement => {
+type TPropTypes = {
+  routesData: IData[];
+  children?: never;
+};
+
+const Routes: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
   return (
     <Switch>
       {routesData.map(

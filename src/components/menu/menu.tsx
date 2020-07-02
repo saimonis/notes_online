@@ -1,17 +1,23 @@
-import React, { FC, ReactElement, useState } from "react";
+import React, { FC, ReactElement, ReactNode, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import { Menu as MenuAntd } from "antd";
 
-import { Link, useLocation } from "react-router-dom";
-
 import "./menu.css";
 
-type PropTypes = {
-  routesData: object[];
+interface IData {
+  to: string;
+  title?: string;
+  element: ReactNode;
+  exact?: boolean;
+}
+
+type TPropTypes = {
+  routesData: IData[];
   children?: never;
 };
 
-const Menu: FC<PropTypes> = ({ routesData }: PropTypes): ReactElement => {
+const Menu: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
   const [count, setState] = useState("");
   let location = useLocation();
   const data: any = [];
