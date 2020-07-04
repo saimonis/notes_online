@@ -10,3 +10,7 @@
 /*    height: 100%;*/
 /*    padding:12px 0;*/
 /*}*/
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  border-radius: 5%;
+  position: relative;
+}

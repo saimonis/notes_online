@@ -59,7 +59,7 @@ const Main = ({ sendData }: any) => {
   return (
     <>
       <DataView />
-      <div style={{ height: "20vh" }}>{form}</div>
+      <div style={{ minHeight: "10vh" }}>{form}</div>
     </>
   );
 };

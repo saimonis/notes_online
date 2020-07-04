@@ -1,4 +1,5 @@
 import routesData from "./config/menuData";
+import "./App.less";
 
 import React, { FC, ReactElement } from "react";
 
