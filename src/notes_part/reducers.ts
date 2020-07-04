@@ -1,9 +1,12 @@
-const defaultState = [
-  {
-    id: 1,
-    text: "Here is nothing",
-  },
-];
+const defaultState: any = [];
+
+for (let i = 0; i < 15; i++) {
+  defaultState.push({
+    id: 1 + i,
+    date: new Date(),
+    text: "Here is text" + i,
+  });
+}
 
 const notes = (state = defaultState, action: any) => {
   switch (action.type) {
@@ -12,6 +15,7 @@ const notes = (state = defaultState, action: any) => {
         ...state,
         {
           id: action.id,
+          date: action.date,
           text: action.text,
         },
       ];

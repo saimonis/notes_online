@@ -1,36 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import { addTodo } from "../notes_part/actions";
-
 import { Form, Input, SubmitButton } from "formik-antd";
-
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { addTodo } from "../notes_part/actions";
+
+import DataView from "../notes_part/notes_components/data_view";
+
 const { TextArea } = Input;
 
-interface IState {
-  notes: any;
-}
-
-interface IPropsTypes {
-  sendData: (value: object) => object;
-  state: IState;
-}
 const SignupSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
   text: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
 });
 
-const Main = (props: IPropsTypes) => {
-  // const [form] = Form.useForm();
+const Main = ({ sendData }: any) => {
   const formItemLayout = {
     labelCol: {
       span: 0,
@@ -50,22 +37,12 @@ const Main = (props: IPropsTypes) => {
     <Formik
       initialValues={{ title: "", text: "" }}
       onSubmit={(values, action) => {
-        if (action.validateForm()) {
-          alert("lox");
-        }
-        props.sendData(values);
+        sendData(values);
         action.resetForm();
       }}
       validationSchema={SignupSchema}
     >
       <Form {...formItemLayout}>
-        <Form.Item name="title">
-          <TextArea
-            placeholder="Введите сюда свою title"
-            autoSize
-            name="title"
-          />
-        </Form.Item>
         <Form.Item name="text">
           <TextArea
             placeholder="Введите сюда свою заметку"
@@ -79,27 +56,18 @@ const Main = (props: IPropsTypes) => {
       </Form>
     </Formik>
   );
-
-  let data = props.state.notes.map((item: any) => {
-    return <div key={item.id}>{item.text}</div>;
-  });
-  console.log(props);
   return (
     <>
-      {form} {data}
+      <DataView />
+      <div style={{ height: "20vh" }}>{form}</div>
     </>
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  state: state,
-});
-
-// interface IDispatch {
-//   title:string,
-//   text:string
-// }
+const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch: any) => ({
-  sendData: (obj: any) => dispatch(addTodo(obj)),
+  sendData: (obj: any) => {
+    dispatch(addTodo(obj));
+  },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

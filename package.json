@@ -18,6 +18,7 @@
     "formik": "^2.1.4",
     "formik-antd": "^2.0.1",
     "husky": "^4.2.5",
+    "jquery": "^3.5.1",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
@@ -38,8 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}",
     "ccheck": "tsc && yarn lint"
   },
   "eslintConfig": {

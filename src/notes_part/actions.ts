@@ -1,9 +1,10 @@
-export const addTodo = ({ text, title }: { text: string; title: string }) => {
-  const time: Date = new Date();
+export const addTodo = ({ text }: { text: string }) => {
+  const date: Date = new Date();
+  const time: number = date.getTime();
   return {
     type: "ADD_TODO",
-    id: time.getTime(),
-    title: title,
-    text: text,
+    id: time + text,
+    date,
+    text,
   };
 };
