@@ -58,7 +58,7 @@ const Main = ({ sendData }: any) => {
   );
   return (
     <>
-      <DataView />
+      <DataView hours={24} />
       <div style={{ minHeight: "10vh" }}>{form}</div>
     </>
   );

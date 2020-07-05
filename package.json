@@ -18,12 +18,14 @@
     "antd": "^4.4.0",
     "antd-dayjs-webpack-plugin": "^1.0.0",
     "craco-less": "^1.17.0",
+    "dayjs": "^1.8.29",
     "formik": "^2.1.4",
     "formik-antd": "^2.0.1",
     "husky": "^4.2.5",
     "jquery": "^3.5.1",
     "lint-staged": "^10.2.11",
     "moment": "^2.27.0",
+    "moment-locales-webpack-plugin": "^1.2.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -39,6 +41,7 @@
     "yup": "^0.29.1"
   },
   "scripts": {
+    "postbuild": "react-snap",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
@@ -73,6 +76,7 @@
     ]
   },
   "devDependencies": {
-    "react-devtools": "^4.7.0"
+    "react-devtools": "^4.7.0",
+    "react-snap": "^1.23.0"
   }
 }
