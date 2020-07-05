@@ -13,6 +13,7 @@ interface IPropTypes {
 
 const DataView: FC<IPropTypes> = ({ notes }: IPropTypes): ReactElement => {
   const viewDiv = useRef(null);
+  const data = [...notes];
   useEffect(() => {
     const currentElement = viewDiv.current;
     // @ts-ignore
@@ -22,35 +23,58 @@ const DataView: FC<IPropTypes> = ({ notes }: IPropTypes): ReactElement => {
   }, [notes]);
   let i = 1;
   const addData = (item: any, index: number) => {
-    if (notes[index + 1]) {
-      if (
-        notes[index].date.toDateString() !==
-        notes[index + 1].date.toDateString()
-      ) {
-        i++;
-      } else {
-        i = 1;
-        if (
-          new Date().getTime() / 1000 / 60 / 60 -
-            item.date.getTime() / 1000 / 60 / 60 &&
-          i === 1
-        ) {
-          return (
-            <List.Item>
-              <div className="ant-list-item-time">
-                {item.date.toDateString()}
-              </div>
-            </List.Item>
-          );
-        }
-      }
-    }
+    const returnIt = () => (
+      <List.Item>
+        <div className="ant-list-item-time">
+          {item.date.toDateString()}
+          ind {index}
+        </div>
+      </List.Item>
+    );
+    // if (notes[index + 1]) {
+    //   if (
+    //     notes[index].date.toDateString() !==
+    //     notes[index + 1].date.toDateString()
+    //   ) {
+    //     i++;
+    //   } else {
+    //     i = 1;
+    //     if (
+    //       new Date().getTime() / 1000 / 60 / 60 -
+    //         item.date.getTime() / 1000 / 60 / 60 &&
+    //       i === 1
+    //     ) {
+    //       return (
+    //         <List.Item>
+    //           <div className="ant-list-item-time">
+    //             {item.date.toDateString()}
+    //             ind {index}
+    //           </div>
+    //         </List.Item>
+    //       );
+    //     }
+    //   }
+    // }
+    // if (index === 0 && notes[0]===notes[index])  {
+    //   return (
+    //     <List.Item>
+    //       <div className="ant-list-item-time">{item.date.toDateString()} ind0</div>
+    //     </List.Item>
+    //   );
+    // }
     if (index === 0) {
-      return (
-        <List.Item>
-          <div className="ant-list-item-time">{item.date.toDateString()}</div>
-        </List.Item>
-      );
+      return returnIt();
+    }
+    if (
+      data[index - 1].date.toDateString() &&
+      data[index - 1].date.toDateString() !== data[index].date.toDateString()
+    ) {
+      i = 1;
+    } else {
+      i++;
+    }
+    if (i === 1) {
+      return returnIt();
     }
   };
   return (
@@ -67,7 +91,7 @@ const DataView: FC<IPropTypes> = ({ notes }: IPropTypes): ReactElement => {
       <List
         size="small"
         bordered
-        dataSource={notes}
+        dataSource={data}
         renderItem={(item: any, index: number) => (
           <>
             {addData(item, index)}

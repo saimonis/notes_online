@@ -17,8 +17,18 @@ const Routes: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
   return (
     <Switch>
       {routesData.map(
-        ({ to, element, exact }: any): ReactElement => {
-          return <Route path={to} component={element} key={to} exact={exact} />;
+        ({ to, element: Element, exact }: any): ReactElement => {
+          return (
+            <Route
+              path={to}
+              render={(props) => {
+                props.location.pathname = to;
+                return <Element />;
+              }}
+              key={to}
+              exact={exact}
+            />
+          );
         }
       )}
     </Switch>

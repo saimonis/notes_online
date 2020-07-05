@@ -21,6 +21,7 @@ const routesData: Obj[] = [
     to: "/stats",
     title: "Stats",
     element: Stats,
+    exact: true,
   },
 ];
 

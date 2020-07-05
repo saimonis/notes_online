@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Stats extends Component {
-  render() {
-    return <div>Stats</div>;
-  }
-}
+const Stats = (props: any) => {
+  console.log(props);
+  return <div>Stats</div>;
+};
 
 export default Stats;
