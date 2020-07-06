@@ -3,13 +3,20 @@ import defaultState from "../config/viewData";
 export const addTodo = ({ text }: { text: string }) => {
   const date: Date = new Date();
   const time: number = date.getTime();
-  return {
-    type: "ADD_NOTE",
-    payload: {
-      id: time + text,
-      date,
-      text,
-    },
+  return (dispatch: any) => {
+    dispatch({
+      type: "ADD_NOTE",
+      payload: {
+        id: time + text,
+        date,
+        text,
+      },
+    });
+    setTimeout(() => {
+      dispatch({
+        type: "ADD_NOTE_SUCCESS",
+      });
+    }, 1000);
   };
 };
 

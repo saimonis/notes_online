@@ -27,7 +27,7 @@ export const form = (state = formDefaultState, action: any) => {
   switch (action.type) {
     case "ADD_NOTE":
       return {
-        loading: false,
+        loading: true,
       };
     case "ADD_NOTE_SUCCESS":
       return {
