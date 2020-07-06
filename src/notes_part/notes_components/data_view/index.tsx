@@ -1,3 +1,3 @@
-import DataView from "./dataView";
+import DataView from "./DataView";
 
 export default DataView;

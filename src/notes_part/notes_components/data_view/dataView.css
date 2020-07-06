@@ -1,8 +1,16 @@
 .ant-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
   border-bottom-color: #d9d9d9 !important;
   font-weight: 600;
+  user-select: none;
 }
 .ant-list-item-time {
   font-size: 0.8em;
   font-weight: 500;
+}
+.ant-list-item-data:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
