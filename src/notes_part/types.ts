@@ -7,7 +7,7 @@ export interface IItem {
 export interface IForm {
   sendData: any;
   loading: boolean;
-  item: boolean | object;
+  item?: IItem | any;
 }
 
 export interface IState {

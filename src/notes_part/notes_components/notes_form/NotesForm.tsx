@@ -47,7 +47,6 @@ const NotesForm = ({ sendData, loading, item }: IForm) => {
               placeholder="Введите сюда свою заметку"
               autoSize
               name="text"
-              defaultValue={item.text}
               value={text}
               onChange={(e) => {
                 setText(e.target.value);

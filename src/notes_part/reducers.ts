@@ -36,7 +36,7 @@ interface IFormDefaultState {
   item: boolean | object;
 }
 
-const formDefaultState: IFormDefaultState = { item: false, loading: false };
+const formDefaultState: IFormDefaultState = { item: {}, loading: false };
 
 export const form = (state = formDefaultState, action: any) => {
   switch (action.type) {
