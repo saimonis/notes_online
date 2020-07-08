@@ -38,8 +38,9 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
                   items[i].classList.remove("chosed-item");
                 }
               }
-              // @ts-ignore
+
               e.target
+                // @ts-ignore
                 .closest(".ant-list-item")
                 .classList.toggle("chosed-item");
               props.onChangeItemData(item);
