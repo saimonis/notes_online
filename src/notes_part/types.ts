@@ -3,7 +3,7 @@ export interface IItem {
   text: string;
 }
 export interface IState {
-  form: object;
+  form: { loading: boolean };
   notes: { loading: boolean; payload: [] };
 }
 

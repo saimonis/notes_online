@@ -4,6 +4,7 @@ import React from "react";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { addTodo } from "../../actions";
+import { IState } from "../../types";
 
 const { TextArea } = Input;
 
@@ -64,7 +65,7 @@ const NotesForm = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IState) => {
   return { loading: state.form.loading };
 };
 const mapDispatchToProps = (dispatch: any) => ({
