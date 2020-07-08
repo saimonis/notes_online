@@ -11,6 +11,12 @@ import "./dataView.css";
 
 import { IItem, IState, IDataView } from "../../types";
 
+const isEdited = (item: any) => {
+  if (item.edited) {
+    return " edited";
+  }
+};
+
 const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
   const viewDiv = useRef(null);
   const newData = [...props.data.payload];
@@ -66,7 +72,9 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
             <List.Item>
               <div className="ant-list-item-data">
                 <div className="ant-list-item-time">
-                  {dayjs(item.date).format("H mma")}
+                  <span>
+                    {dayjs(item.date).format("H mma")} {isEdited(item)}
+                  </span>
                   {editItem(item)}
                 </div>
                 {item.text}

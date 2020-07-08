@@ -10,6 +10,7 @@ export const sendForm = ({ text }: { text: string; item: any }, item: any) => {
         payload: {
           id: item.id,
           date: item.date,
+          edited: true,
           text,
         },
       });
