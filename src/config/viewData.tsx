@@ -25,6 +25,7 @@ defaultState.push({
   id: new Date().getTime() + 122 + "",
   date: new Date(1593711111128),
   text: "02",
+  edited: true,
 });
 
 defaultState.push({
