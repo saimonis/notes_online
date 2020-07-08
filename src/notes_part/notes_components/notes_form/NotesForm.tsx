@@ -3,8 +3,8 @@ import { Form, Input, SubmitButton } from "formik-antd";
 import React from "react";
 import * as Yup from "yup";
 import { connect } from "react-redux";
-import { addTodo } from "../../actions";
-import { IState } from "../../types";
+import { sendForm } from "../../actions";
+import { IForm, IState } from "../../types";
 
 const { TextArea } = Input;
 
@@ -15,13 +15,7 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const NotesForm = ({
-  sendData,
-  loading,
-}: {
-  sendData: any;
-  loading: boolean;
-}) => {
+const NotesForm = ({ sendData, loading, item }: IForm) => {
   const formItemLayout = {
     labelCol: {
       span: 0,
@@ -36,24 +30,45 @@ const NotesForm = ({
       offset: 0,
     },
   };
-  return (
-    <div style={{ minHeight: "10vh" }}>
-      <Formik
-        initialValues={{ title: "", text: "" }}
-        onSubmit={(values, action) => {
-          sendData(values);
-          action.resetForm();
-        }}
-        validationSchema={SignupSchema}
-      >
-        <Form {...formItemLayout}>
+  const textAreaFiler = (item: any) => {
+    if (item.id) {
+      return (
+        <>
+          <div>Edited message: {item.text}</div>
           <Form.Item name="text">
             <TextArea
               placeholder="Введите сюда свою заметку"
               autoSize
               name="text"
+              defaultValue={item.text}
             />
           </Form.Item>
+        </>
+      );
+    }
+    return (
+      <Form.Item name="text">
+        <TextArea
+          placeholder="Введите сюда свою заметку"
+          autoSize
+          name="text"
+        />
+      </Form.Item>
+    );
+  };
+  return (
+    <div style={{ minHeight: "10vh" }}>
+      <Formik
+        initialValues={{ title: "", text: "" }}
+        onSubmit={(values, action) => {
+          sendData(values, item);
+          action.resetForm();
+        }}
+        validationSchema={SignupSchema}
+      >
+        <Form {...formItemLayout}>
+          {textAreaFiler(item)}
+
           <Form.Item name="submit" {...buttonItemLayout}>
             <SubmitButton type="primary" loading={loading}>
               Submit
@@ -66,11 +81,14 @@ const NotesForm = ({
 };
 
 const mapStateToProps = (state: IState) => {
-  return { loading: state.form.loading };
+  return {
+    loading: state.form.loading,
+    item: state.form.item,
+  };
 };
 const mapDispatchToProps = (dispatch: any) => ({
-  sendData: (obj: any) => {
-    dispatch(addTodo(obj));
+  sendData: (formData: any, item: any) => {
+    dispatch(sendForm(formData, item));
   },
 });
 

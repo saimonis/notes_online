@@ -7,10 +7,15 @@
   user-select: none;
 }
 .ant-list-item-time {
+  display: flex;
+  justify-content: space-between;
   font-size: 0.8em;
   font-weight: 500;
 }
 .ant-list-item-data:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+.ant-list-item-data {
+  width: 100%;
 }

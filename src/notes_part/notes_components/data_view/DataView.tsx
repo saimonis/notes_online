@@ -1,9 +1,10 @@
 import React, { FC, ReactElement, useRef, useEffect } from "react";
 import dayjs from "dayjs";
 import { connect } from "react-redux";
-import { List } from "antd";
+import { Button, List, Tooltip } from "antd";
+import { EditOutlined } from "@ant-design/icons";
 
-import { fetchData } from "../../actions";
+import { fetchData, onChangeItemData } from "../../actions";
 import AddData from "./AddData";
 
 import "./dataView.css";
@@ -14,8 +15,24 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
   const viewDiv = useRef(null);
   const newData = [...props.data.payload];
 
+  const editItem = props.change_data
+    ? (item: object) => (
+        <Tooltip title="Edit" overlay={<div>Edit</div>}>
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<EditOutlined />}
+            onClick={() => {
+              props.onChangeItemData(item);
+            }}
+          />
+        </Tooltip>
+      )
+    : () => {};
+
   useEffect(() => {
-    fetchData();
+    // @ts-ignore
+    props.fetchData();
   }, []);
   //Scroll down
   useEffect(() => {
@@ -50,8 +67,8 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
               <div className="ant-list-item-data">
                 <div className="ant-list-item-time">
                   {dayjs(item.date).format("H mma")}
+                  {editItem(item)}
                 </div>
-
                 {item.text}
               </div>
             </List.Item>
@@ -84,14 +101,19 @@ const mapStateToProps = (state: IState, ownProps: { hours?: number }) => ({
   data: (() => {
     let { hours } = ownProps;
     return {
-      payload: dataFilter(state.notes.payload, hours),
+      payload: dataFilter(state.notes.data, hours),
       loading: state.notes.loading,
     };
   })(),
 });
-const mapDispatchToProps = (dispatch: (arg: object) => object): object => {
+const mapDispatchToProps = (dispatch: any): any => {
   return {
-    fetchData: dispatch(fetchData()),
+    fetchData: () => {
+      dispatch(fetchData());
+    },
+    onChangeItemData: (item: object) => {
+      dispatch(onChangeItemData(item));
+    },
   };
 };
 
