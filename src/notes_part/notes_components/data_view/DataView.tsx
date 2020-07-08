@@ -28,7 +28,20 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
             type="primary"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={() => {
+            onClick={(e) => {
+              // @ts-ignore
+              console.log("");
+              // @ts-ignore
+              const items = e.target.closest(".ant-list-items").children;
+              for (let i = 0; i < items.length; i++) {
+                if (items[i].classList.contains("chosed-item")) {
+                  items[i].classList.remove("chosed-item");
+                }
+              }
+              // @ts-ignore
+              e.target
+                .closest(".ant-list-item")
+                .classList.toggle("chosed-item");
               props.onChangeItemData(item);
             }}
           />
