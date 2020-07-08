@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { Form, Input, SubmitButton } from "formik-antd";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { sendForm } from "../../actions";
@@ -16,6 +16,13 @@ const SignupSchema = Yup.object().shape({
 });
 
 const NotesForm = ({ sendData, loading, item }: IForm) => {
+  const [text, setText] = useState("");
+  useEffect(() => {
+    // @ts-ignore
+    if (item.id) {
+      setText(item.text);
+    }
+  }, [item]);
   const formItemLayout = {
     labelCol: {
       span: 0,
@@ -41,6 +48,10 @@ const NotesForm = ({ sendData, loading, item }: IForm) => {
               autoSize
               name="text"
               defaultValue={item.text}
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+              }}
             />
           </Form.Item>
         </>
