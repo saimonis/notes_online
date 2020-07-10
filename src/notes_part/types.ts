@@ -12,7 +12,7 @@ export interface IForm {
 
 export interface IState {
   form: { loading: boolean; item: boolean | object };
-  notes: { loading: boolean; data: [] };
+  notes: { loading: boolean; data: []; activeItem: string };
 }
 
 export interface IDataView {
@@ -21,6 +21,7 @@ export interface IDataView {
   data?: any;
   fetchData?: object;
   onChangeItemData?: any;
+  activeItem?: string;
 }
 
 export interface IMain {

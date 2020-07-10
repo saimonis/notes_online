@@ -1,10 +1,10 @@
-import React, { FC, ReactElement, useRef, useEffect } from "react";
+import React, { FC, ReactElement, useRef, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { Button, List, Tooltip } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 
-import { fetchData, onChangeItemData } from "../../actions";
+import { onChangeItemData } from "../../actions";
 import AddData from "./AddData";
 
 import "./dataView.css";
@@ -18,42 +18,54 @@ const isEdited = (item: any) => {
 };
 
 const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
+  const [active, setActiveItem] = useState(props.activeItem);
   const viewDiv = useRef(null);
-  const newData = [...props.data.payload];
+  const newData = [...props.data];
+
+  const active_item = (item: any) => {
+    return (
+      <List.Item className={active === item.id ? "ant-list-item-active" : ""}>
+        <div className="ant-list-item-data">
+          <div className="ant-list-item-time">
+            <span>
+              {dayjs(item.date).format("H mma")} {isEdited(item)}
+            </span>
+            {editItem(item)}
+          </div>
+          {item.text}
+        </div>
+      </List.Item>
+    );
+  };
 
   const editItem = props.change_data
-    ? (item: object) => (
+    ? (item: any) => (
         <Tooltip title="Edit" overlay={<div>Edit</div>}>
           <Button
             type="primary"
             shape="circle"
             icon={<EditOutlined />}
             onClick={(e) => {
-              // @ts-ignore
-              console.log("");
-              // @ts-ignore
-              const items = e.target.closest(".ant-list-items").children;
-              for (let i = 0; i < items.length; i++) {
-                if (items[i].classList.contains("chosed-item")) {
-                  items[i].classList.remove("chosed-item");
-                }
-              }
-
-              e.target
-                // @ts-ignore
-                .closest(".ant-list-item")
-                .classList.toggle("chosed-item");
+              setActiveItem(item.id);
+              //   console.log(e);
+              // // @ts-ignore
+              // const items = document.querySelector(".ant-list-items").children;
+              // for (let i = 0; i < items.length; i++) {
+              //   if (items[i].classList.contains("chosed-item")) {
+              //     items[i].classList.remove("chosed-item");
+              //   }
+              // }
+              //
+              // e.target
+              //   // @ts-ignore
+              //   .closest(".ant-list-item")
+              //   .classList.toggle("chosed-item");
               props.onChangeItemData(item);
             }}
           />
         </Tooltip>
       )
     : () => {};
-
-  useEffect(() => {
-    // @ts-ignore
-    props.fetchData();
-  }, []);
   //Scroll down
   useEffect(() => {
     const currentElement = viewDiv.current;
@@ -83,17 +95,7 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
         renderItem={(item: IItem, index: number) => (
           <>
             {AddData(newData)(item, index)}
-            <List.Item>
-              <div className="ant-list-item-data">
-                <div className="ant-list-item-time">
-                  <span>
-                    {dayjs(item.date).format("H mma")} {isEdited(item)}
-                  </span>
-                  {editItem(item)}
-                </div>
-                {item.text}
-              </div>
-            </List.Item>
+            {active_item(item)}
           </>
         )}
       />
@@ -101,38 +103,13 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
   );
 };
 
-const dataFilter = (data: IItem[], hours?: number) => {
-  let newData: IItem[];
-  if (hours) {
-    newData = data.filter((item: IItem) => {
-      return (
-        new Date().getTime() / 1000 / 60 / 60 -
-          item.date.getTime() / 1000 / 60 / 60 <=
-        hours
-      );
-    });
-  } else newData = [...data];
-  newData.sort((a: IItem, b: IItem) => {
-    return a.date.getTime() - b.date.getTime();
-  });
-
-  return newData;
-};
-
-const mapStateToProps = (state: IState, ownProps: { hours?: number }) => ({
-  data: (() => {
-    let { hours } = ownProps;
-    return {
-      payload: dataFilter(state.notes.data, hours),
-      loading: state.notes.loading,
-    };
-  })(),
+const mapStateToProps = (state: IState) => ({
+  loading: state.notes.loading,
+  activeItem: state.notes.activeItem,
 });
+
 const mapDispatchToProps = (dispatch: any): any => {
   return {
-    fetchData: () => {
-      dispatch(fetchData());
-    },
     onChangeItemData: (item: object) => {
       dispatch(onChangeItemData(item));
     },

@@ -1,7 +1,7 @@
 import React from "react";
 
-import DataView from "../notes_part/notes_components/data_view";
 import NotesForm from "../notes_part/notes_components/notes_form/NotesForm";
+import DataView from "../notes_part/notes_components/data_view";
 
 const Main = () => {
   return (

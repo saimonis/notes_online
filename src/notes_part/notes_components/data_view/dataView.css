@@ -19,6 +19,7 @@
 .ant-list-item-data {
   width: 100%;
 }
-.chosed-item {
+
+.ant-list-item-active {
   background: gray;
 }

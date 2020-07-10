@@ -1,9 +1,14 @@
 interface INotesDefaultState {
   data: any;
   loading: boolean;
+  activeItem: string;
 }
 
-const notesDefaultState: INotesDefaultState = { data: [], loading: true };
+const notesDefaultState: INotesDefaultState = {
+  data: [],
+  loading: true,
+  activeItem: "",
+};
 
 export const notes = (state: any = notesDefaultState, action: any) => {
   switch (action.type) {
@@ -26,28 +31,8 @@ export const notes = (state: any = notesDefaultState, action: any) => {
           return i;
         }),
       };
-    default:
-      return state;
-  }
-};
-
-interface IFormDefaultState {
-  loading: boolean;
-  item: boolean | object;
-}
-
-const formDefaultState: IFormDefaultState = { item: {}, loading: false };
-
-export const form = (state = formDefaultState, action: any) => {
-  switch (action.type) {
-    case "ADD_NOTE":
-      return { ...state, loading: true };
     case "NOTE_SUCCESS":
-      return { ...state, item: false, loading: false };
-    case "CHANGING_DATA_ITEM_START":
-      return { ...state, item: { ...action.playload } };
-    case "PATCH_ITEM_PROGRESS":
-      return { ...state, loading: true };
+      return { ...state, activeItem: "", loading: false };
     default:
       return state;
   }

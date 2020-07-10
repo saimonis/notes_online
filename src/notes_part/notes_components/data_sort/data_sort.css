@@ -1,0 +1,14 @@
+.site-calendar-demo-card {
+  width: 300px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  margin-bottom: 5px;
+}
+/*.notes_search input{*/
+/*    display: none !important;*/
+/*    width: 0 !important;*/
+/*}*/
+/*.ant-tabs-tab-active .notes_search input{*/
+/*    display: table-cell !important;*/
+/*    width: 100% !important;*/
+/*}*/

@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
-import { notes, form } from "../notes_part/reducers";
+import { notes } from "../notes_part/reducers";
+import form from "../notes_part/notes_components/notes_form/form_reducer";
 
 export default combineReducers({
   notes,
