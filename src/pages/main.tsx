@@ -6,7 +6,8 @@ import NotesForm from "../notes_part/notes_components/notes_form/NotesForm";
 const Main = () => {
   return (
     <>
-      <DataView hours={2224} change_data={true} />
+      <div>За последние 24ч</div>
+      <DataView hours={24} change_data={true} />
       <NotesForm />
     </>
   );
