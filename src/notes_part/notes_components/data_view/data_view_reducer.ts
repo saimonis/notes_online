@@ -10,7 +10,7 @@ const notesDefaultState: INotesDefaultState = {
   activeItem: "",
 };
 
-export const notes = (state: any = notesDefaultState, action: any) => {
+const notes = (state: any = notesDefaultState, action: any) => {
   switch (action.type) {
     case "FETCHING_DATA":
       return {
@@ -37,3 +37,4 @@ export const notes = (state: any = notesDefaultState, action: any) => {
       return state;
   }
 };
+export default notes;

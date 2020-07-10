@@ -9,7 +9,7 @@ import AddData from "./AddData";
 
 import "./dataView.css";
 
-import { IItem, IState, IDataView } from "../../types";
+import { IItem, IState, IDataView } from "./data_view_types";
 
 const isEdited = (item: any) => {
   if (item.edited) {
@@ -45,7 +45,7 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
             type="primary"
             shape="circle"
             icon={<EditOutlined />}
-            onClick={(e) => {
+            onClick={() => {
               setActiveItem(item.id);
               //   console.log(e);
               // // @ts-ignore

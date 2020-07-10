@@ -1,5 +1,5 @@
 import React from "react";
-import { IItem } from "../../types";
+import { IItem } from "./data_view_types";
 import ListDateItem from "./ListDateItem";
 
 const AddData = (data: IItem[]) => {

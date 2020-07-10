@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import DataView from "./DataView";
 import { fetchData } from "../../actions";
-import { IItem, IState } from "../../types";
+import { IItem, IState } from "./data_view_types";
 import { connect } from "react-redux";
 
 interface IDataFiltered {

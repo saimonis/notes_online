@@ -3,10 +3,10 @@ import React from "react";
 import DataView from "../notes_part/notes_components/data_view";
 import DataSort from "../notes_part/notes_components/data_sort";
 import { fetchData } from "../notes_part/actions";
-import { IState } from "../notes_part/types";
+import { IState } from "../notes_part/notes_components/data_view/data_view_types";
 import { connect } from "react-redux";
 
-const Stats = (props: any) => {
+const Stats = () => {
   return (
     <>
       <DataSort />

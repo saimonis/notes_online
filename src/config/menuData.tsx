@@ -3,14 +3,14 @@ import { ReactNode } from "react";
 import Main from "../pages/main";
 import Stats from "../pages/stats";
 
-interface Obj {
+interface IRoutesData {
   to: string;
   title: string;
   element: ReactNode;
   exact?: boolean;
 }
 
-const routesData: Obj[] = [
+const routesData: IRoutesData[] = [
   {
     to: "/",
     title: "Main",

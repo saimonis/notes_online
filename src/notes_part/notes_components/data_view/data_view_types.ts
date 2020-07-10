@@ -23,8 +23,3 @@ export interface IDataView {
   onChangeItemData?: any;
   activeItem?: string;
 }
-
-export interface IMain {
-  loading: boolean;
-  fetchData?: object;
-}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { sendForm } from "../../actions";
-import { IForm, IState } from "../../types";
+import { IForm, IState } from "../data_view/data_view_types";
 
 const { TextArea } = Input;
 
