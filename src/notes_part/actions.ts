@@ -1,6 +1,7 @@
 import defaultState from "../config/viewData";
+import { iItem } from "./notes_components/notes_form/types_notes_form";
 
-export const sendForm = ({ text }: { text: string; item: any }, item: any) => {
+export const sendForm = (text: string, item: iItem) => {
   const date: Date = new Date();
   const time: number = date.getTime();
   return (dispatch: any) => {
@@ -42,7 +43,7 @@ export const fetchData = () => (dispatch: any) => {
 export const onChangeItemData = (item: object) => (dispatch: any) => {
   dispatch({
     type: "CHANGING_DATA_ITEM_START",
-    playload: item,
+    payload: item,
   });
 };
 

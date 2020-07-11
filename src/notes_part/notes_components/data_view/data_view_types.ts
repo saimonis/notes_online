@@ -23,3 +23,16 @@ export interface IDataView {
   onChangeItemData?: any;
   activeItem?: string;
 }
+
+export interface iAction {
+  type: string;
+  loading: boolean;
+  payload: [] | any;
+  sortType: string;
+}
+
+export interface iDataViewState {
+  data: [];
+  loading: boolean;
+  sortType: string | object;
+}

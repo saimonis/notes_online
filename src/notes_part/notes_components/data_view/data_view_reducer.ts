@@ -1,16 +1,12 @@
-interface INotesDefaultState {
-  data: any;
-  loading: boolean;
-  sortType: string | object;
-}
+import { iAction, iDataViewState } from "./data_view_types";
 
-const notesDefaultState: INotesDefaultState = {
+const notesDefaultState: iDataViewState = {
   data: [],
   loading: true,
   sortType: "",
 };
 
-const notes = (state: any = notesDefaultState, action: any) => {
+const notes = (state: iDataViewState = notesDefaultState, action: iAction) => {
   switch (action.type) {
     case "SORT_DATA":
       return {

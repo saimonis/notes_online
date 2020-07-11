@@ -3,7 +3,6 @@ import DataView from "./DataView";
 import { fetchData } from "../../actions";
 import { IItem } from "./data_view_types";
 import { connect } from "react-redux";
-import moment from "moment";
 
 interface IDataFiltered {
   hours?: number;

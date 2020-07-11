@@ -1,23 +1,13 @@
-import React, { FC, ReactElement, ReactNode, useState } from "react";
+import React, { FC, ReactElement, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { Menu as MenuAntd } from "antd";
 
 import "./menu.css";
 
-interface IData {
-  to: string;
-  title?: string;
-  element: ReactNode;
-  exact?: boolean;
-}
+import { tPropTypes, iRoutesData } from "../../types";
 
-type TPropTypes = {
-  routesData: IData[];
-  children?: never;
-};
-
-const Menu: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
+const Menu: FC<tPropTypes> = ({ routesData }: tPropTypes): ReactElement => {
   const [count, setState] = useState("");
   let location = useLocation();
   const data: any = [];
@@ -30,7 +20,7 @@ const Menu: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
   return (
     <MenuAntd theme="dark" mode="horizontal" selectedKeys={[count]}>
       {routesData.map(
-        ({ to, title }: any, index: number): ReactElement => {
+        ({ to, title }: iRoutesData, index: number): ReactElement => {
           data.push(to);
           return (
             <MenuAntd.Item key={(index + 1).toString()}>
