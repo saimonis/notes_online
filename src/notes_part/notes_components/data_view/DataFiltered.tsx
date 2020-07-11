@@ -4,13 +4,7 @@ import { fetchData } from "../../actions";
 import { IItem } from "./data_view_types";
 import { connect } from "react-redux";
 
-interface IDataFiltered {
-  hours?: number;
-  change_data?: boolean;
-  data?: [];
-  activeItem?: string;
-  sortType?: string | object;
-}
+import { iDataFiltered } from "./data_view_types";
 
 const dataFilter = (props: any) => {
   let data = props.data;
@@ -29,9 +23,8 @@ const dataFilter = (props: any) => {
   return newData;
 };
 
-const DataFiltered = (props: IDataFiltered) => {
+const DataFiltered = (props: iDataFiltered) => {
   useEffect(() => {
-    // @ts-ignore
     props.fetchData();
   }, []);
 

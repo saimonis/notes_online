@@ -36,3 +36,11 @@ export interface iDataViewState {
   loading: boolean;
   sortType: string | object;
 }
+export interface iDataFiltered {
+  hours?: number | null;
+  change_data?: boolean;
+  data?: IItem[] | any;
+  activeItem?: string;
+  sortType?: string | object;
+  fetchData?: any;
+}
