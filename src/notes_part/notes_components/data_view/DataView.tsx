@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useRef, useEffect, useState } from "react";
-import dayjs from "dayjs";
+import moment from "moment";
 import { connect } from "react-redux";
 import { Button, List, Tooltip } from "antd";
 import { EditOutlined } from "@ant-design/icons";
@@ -18,7 +18,10 @@ const isEdited = (item: any) => {
 };
 
 const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
-  const [active, setActiveItem] = useState(props.activeItem);
+  useEffect(() => {
+    setActiveItem("");
+  }, [props]);
+  const [active, setActiveItem] = useState();
   const viewDiv = useRef(null);
   const newData = [...props.data];
 
@@ -28,7 +31,7 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
         <div className="ant-list-item-data">
           <div className="ant-list-item-time">
             <span>
-              {dayjs(item.date).format("H mma")} {isEdited(item)}
+              {moment(item.date).format("H mma")} {isEdited(item)}
             </span>
             {editItem(item)}
           </div>
@@ -47,19 +50,6 @@ const DataView: FC<IDataView> = (props: IDataView): ReactElement => {
             icon={<EditOutlined />}
             onClick={() => {
               setActiveItem(item.id);
-              //   console.log(e);
-              // // @ts-ignore
-              // const items = document.querySelector(".ant-list-items").children;
-              // for (let i = 0; i < items.length; i++) {
-              //   if (items[i].classList.contains("chosed-item")) {
-              //     items[i].classList.remove("chosed-item");
-              //   }
-              // }
-              //
-              // e.target
-              //   // @ts-ignore
-              //   .closest(".ant-list-item")
-              //   .classList.toggle("chosed-item");
               props.onChangeItemData(item);
             }}
           />

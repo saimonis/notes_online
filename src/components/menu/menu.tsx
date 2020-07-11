@@ -37,7 +37,7 @@ const Menu: FC<TPropTypes> = ({ routesData }: TPropTypes): ReactElement => {
               <Link to={to}>{title}</Link>
             </MenuAntd.Item>
           );
-        }
+        },
       )}
     </MenuAntd>
   );

@@ -45,3 +45,10 @@ export const onChangeItemData = (item: object) => (dispatch: any) => {
     playload: item,
   });
 };
+
+export const onSortData = (sortType: string | object) => (dispatch: any) => {
+  dispatch({
+    type: "SORT_DATA",
+    sortType: sortType,
+  });
+};

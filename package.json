@@ -14,20 +14,12 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
-    "@types/redux-logger": "^3.0.8",
     "@types/yup": "^0.29.3",
     "antd": "^4.4.0",
-    "antd-dayjs-webpack-plugin": "^1.0.0",
     "craco-less": "^1.17.0",
-    "dayjs": "^1.8.29",
     "formik": "^2.1.4",
     "formik-antd": "^2.0.1",
-    "husky": "^4.2.5",
-    "jquery": "^3.5.1",
-    "lint-staged": "^10.2.11",
     "moment": "^2.27.0",
-    "moment-locales-webpack-plugin": "^1.2.0",
-    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -35,10 +27,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "shared-config": "^0.3.2",
-    "styled-components": "^5.1.1",
     "typescript": "~3.7.2",
     "yup": "^0.29.1"
   },
@@ -49,6 +39,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,json}\"",
+    "lint:write": "eslint --debug src/ --fix",
     "pretty": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}",
     "ccheck": "tsc && yarn lint"
   },
@@ -57,12 +48,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn pretty"
     }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+      "prettier --write","git add"
     ]
   },
   "browserslist": {
@@ -79,6 +71,9 @@
   },
   "devDependencies": {
     "react-devtools": "^4.7.0",
-    "react-snap": "^1.23.0"
+    "react-snap": "^1.23.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
   }
 }

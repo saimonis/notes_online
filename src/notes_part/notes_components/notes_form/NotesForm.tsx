@@ -9,10 +9,7 @@ import { IForm, IState } from "../data_view/data_view_types";
 const { TextArea } = Input;
 
 const SignupSchema = Yup.object().shape({
-  text: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+  text: Yup.string().min(2, "Too Short!").max(50, "Too Long!").required("Required"),
 });
 
 const NotesForm = ({ sendData, loading, item }: IForm) => {
@@ -58,11 +55,7 @@ const NotesForm = ({ sendData, loading, item }: IForm) => {
     }
     return (
       <Form.Item name="text">
-        <TextArea
-          placeholder="Введите сюда свою заметку"
-          autoSize
-          name="text"
-        />
+        <TextArea placeholder="Введите сюда свою заметку" autoSize name="text" />
       </Form.Item>
     );
   };
