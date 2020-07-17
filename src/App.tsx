@@ -1,7 +1,7 @@
 import routesData from "./config/menuData";
 import "./App.less";
 
-import React, { FC, ReactElement } from "react";
+import React from "react";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -21,22 +21,37 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 const { Header, Content, Footer } = Layout;
 
-const App: FC = (): ReactElement => {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Layout>
-          <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-            <Menu routesData={routesData} />
-          </Header>
-          <Content style={{ padding: "0 50px", marginTop: 64 }}>
-            <Routes routesData={routesData} />
-          </Content>
-          <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
-        </Layout>
-      </Router>
-    </Provider>
-  );
-};
+class App extends React.PureComponent {
+  state = {
+    theme: undefined,
+  };
+  onThemeChange = (value: any) => {
+    console.log(value);
+    if (value) {
+      this.setState({ theme: { filter: "hue-rotate(220deg) invert(100%)" } });
+    } else {
+      this.setState({ theme: undefined });
+    }
+  };
+
+  render(): any {
+    return (
+      <Provider store={store}>
+        <Router>
+          {/*style = {{filter:"hue-rotate(220deg) invert(100%)"}}*/}
+          <Layout style={this.state.theme}>
+            <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+              <Menu routesData={routesData} theme_changer={this.onThemeChange} />
+            </Header>
+            <Content style={{ padding: "0 50px", marginTop: 64 }}>
+              <Routes routesData={routesData} />
+            </Content>
+            <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+          </Layout>
+        </Router>
+      </Provider>
+    );
+  }
+}
 
 export default App;

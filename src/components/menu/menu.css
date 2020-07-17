@@ -2,3 +2,19 @@
   border-radius: 5%;
   position: relative;
 }
+.ant-layout-header {
+  background: darkgray;
+}
+
+.ant-menu.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub,
+.ant-menu.ant-menu-dark .ant-menu-sub {
+  background: darkgray;
+}
+.ant-menu {
+  display: flex;
+}
+.antd_theme_switch {
+  order: 1;
+  margin-left: auto;
+}

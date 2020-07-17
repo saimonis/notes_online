@@ -5,9 +5,10 @@ export interface iRoutesData {
   title?: string;
   element: ReactNode;
   exact?: boolean;
+  theme_changer?: any;
 }
 
 export type tPropTypes = {
   routesData: iRoutesData[];
-  children?: never;
+  theme_changer?: any;
 };
