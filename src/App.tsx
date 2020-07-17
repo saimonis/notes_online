@@ -21,37 +21,33 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 
 const { Header, Content, Footer } = Layout;
 
-class App extends React.PureComponent {
-  state = {
-    theme: undefined,
-  };
-  onThemeChange = (value: any) => {
-    console.log(value);
+const App = () => {
+  const [theme, setTheme] = React.useState({ filter: "" });
+
+  const onThemeChange = (value: any) => {
     if (value) {
-      this.setState({ theme: { filter: "hue-rotate(220deg) invert(100%)" } });
+      setTheme({ filter: "hue-rotate(240deg) invert(100%)" });
     } else {
-      this.setState({ theme: undefined });
+      setTheme({ filter: "" });
     }
   };
 
-  render(): any {
-    return (
-      <Provider store={store}>
-        <Router>
-          {/*style = {{filter:"hue-rotate(220deg) invert(100%)"}}*/}
-          <Layout style={this.state.theme}>
-            <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-              <Menu routesData={routesData} theme_changer={this.onThemeChange} />
-            </Header>
-            <Content style={{ padding: "0 50px", marginTop: 64 }}>
-              <Routes routesData={routesData} />
-            </Content>
-            <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
-          </Layout>
-        </Router>
-      </Provider>
-    );
-  }
-}
+  return (
+    <Provider store={store}>
+      <Router>
+        {/*style = {{filter:"hue-rotate(220deg) invert(100%)"}}*/}
+        <Layout style={theme}>
+          <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+            <Menu routesData={routesData} theme_changer={onThemeChange} />
+          </Header>
+          <Content style={{ padding: "0 50px", marginTop: 64 }}>
+            <Routes routesData={routesData} />
+          </Content>
+          <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
+        </Layout>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
